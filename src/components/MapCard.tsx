@@ -1,14 +1,20 @@
+import React, { FC } from "react";
 import Card, { CardData } from "./Card";
-import { MapItem } from "../lib/types";
+import type { MapItem } from "../lib/types";
 
-const MapCard = ({ map }: { map: MapItem }) => {
+interface Props {
+  map: MapItem;
+}
+
+const MapCard: FC<Props> = ({ map }) => {
   const data: CardData = {
     id: map.id,
     title: map.name,
-    imageUrl: map.thumbnailUrl,
-    subtitle: map.region,
-    details: [map.size, map.difficulty],
+    imageUrl: `/img/maps/${map.fileName}.png`, // or your actual path
+    subtitle: `Introduced: ${map.firstAppeared}`,
+    details: [], // add anything else like region/difficulty if you extend the JSON
   };
+
   return <Card item={data} />;
 };
 

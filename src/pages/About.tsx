@@ -1,15 +1,30 @@
-// pages/About.tsx
 import React, { FC, useState } from "react";
 import Navbar from "../components/Navbar";
 import Bg from "../assets/img/background_2.png";
 import TextGenerateEffect from "../components/TextGenerate";
 import FooterLogo from "../assets/img/logo.png";
+import MapCard from "../components/MapCard";
+import CharacterCard from "../components/CharacterCard";
+
+import { rawCharacters, rawMaps } from "../lib/data"; // ✅ import JSON data
+import { Character, MapItem } from "../lib/types";
+
 const tabs = ["Characters", "Maps"] as const;
 type Tab = (typeof tabs)[number];
 
 const About: FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>("Characters");
+  const [search, setSearch] = useState("");
+
   const HIGHLIGHTS = new Set(["CHARACTERS", "MAPS"]);
+
+  const filteredCharacters = rawCharacters.filter((char) =>
+    char.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const filteredMaps = rawMaps.filter((map) =>
+    map.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-primary text-white">
@@ -39,6 +54,8 @@ const About: FC = () => {
             <input
               type="text"
               placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               className="font-poppins w-full pl-4 pr-12 py-3 rounded-lg bg-primary backdrop-blur text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
             <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-orange-400">
@@ -47,8 +64,6 @@ const About: FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Search bar */}
 
       {/* Tabs */}
       <div className="max-w-4xl mx-auto mt-8 px-4">
@@ -68,24 +83,15 @@ const About: FC = () => {
           ))}
         </div>
 
-        <div className="mt-6 font-poppins mb-12">
-          {activeTab === "Characters" ? (
-            <div>
-              {/* TODO: map over your characters data */}
-              <p className="text-gray-400 font-poppins">
-                Here will go a list of characters…
-              </p>
-            </div>
-          ) : (
-            <div>
-              {/* TODO: map over your maps data */}
-              <p className="text-gray-400 font-poppins">
-                Here will go a list of maps…
-              </p>
-            </div>
-          )}
+        <div className="mt-6 font-poppins mb-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {activeTab === "Characters"
+            ? filteredCharacters.map((character) => (
+                <CharacterCard key={character.id} character={character} />
+              ))
+            : filteredMaps.map((map) => <MapCard key={map.id} map={map} />)}
         </div>
       </div>
+
       <footer className="bg-black text-white py-10 px-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-4 md:space-y-0">
           <div className="flex  items-center gap-2">
@@ -96,8 +102,6 @@ const About: FC = () => {
             />
             <span className="font-bold text-lg"></span>
           </div>
-
-          {/* Right: Copyright */}
           <div className="text-sm text-gray-400">
             © {new Date().getFullYear()} Strike Mentor. All rights reserved.
           </div>
