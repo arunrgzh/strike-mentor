@@ -18,7 +18,7 @@ export default function VideoShowcase() {
       </section>
       <footer className="bg-black text-white py-10 px-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-4 md:space-y-0">
-          <div className="flex  items-center gap-2">
+          <div className="flex items-center gap-2">
             <img
               src={FooterLogo}
               alt="Logo"
