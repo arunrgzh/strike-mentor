@@ -10,7 +10,7 @@ const MapCard: FC<Props> = ({ map }) => {
   const data: CardData = {
     id: map.id,
     title: map.name,
-    imageUrl: `/img/maps/${map.fileName}.png`, // or your actual path
+    imageUrl: `/images/maps/${map.fileName}.png`, // or your actual path
     subtitle: `Introduced: ${map.firstAppeared}`,
     details: [], // add anything else like region/difficulty if you extend the JSON
   };
