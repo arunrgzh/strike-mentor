@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Bg from "../assets/img/background_2.png";
 import TextGenerateEffect from "../components/TextGenerate";
@@ -6,7 +6,7 @@ import FooterLogo from "../assets/img/logo.png";
 import MapCard from "../components/MapCard";
 import CharacterCard from "../components/CharacterCard";
 
-import { rawCharacters, rawMaps } from "../lib/data"; // ✅ import JSON data
+import { rawMaps } from "../lib/data"; // ✅ import JSON data
 import { Character, MapItem } from "../lib/types";
 
 const tabs = ["Characters", "Maps"] as const;
@@ -15,17 +15,29 @@ type Tab = (typeof tabs)[number];
 const About: FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>("Characters");
   const [search, setSearch] = useState("");
-
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [maps, setMaps] = useState<MapItem[]>([]); // можешь подключить позже
   const HIGHLIGHTS = new Set(["CHARACTERS", "MAPS"]);
-
-  const filteredCharacters = rawCharacters.filter((char) =>
-    char.name.toLowerCase().includes(search.toLowerCase())
-  );
 
   const filteredMaps = rawMaps.filter((map) =>
     map.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  useEffect(() => {
+    const fetchCharacters = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:3001/api/characters?search=${search}`
+        );
+        const data = await res.json();
+        setCharacters(data);
+      } catch (error) {
+        console.error("Ошибка при загрузке персонажей:", error);
+      }
+    };
+
+    fetchCharacters();
+  }, [search]);
   return (
     <div className="min-h-screen bg-primary text-white">
       <Navbar />
@@ -41,7 +53,7 @@ const About: FC = () => {
 
         <div className="relative z-10 flex flex-col items-center justify-center text-center h-full text-center px-4 gap-6">
           <TextGenerateEffect
-            wordClassName="max-w-3xl font-jersey text-xl md:text-2xl lg:text-5xl font-bold mx-auto text-center"
+            wordClassName="text-white max-w-3xl font-jersey text-xl md:text-2xl lg:text-5xl font-bold mx-auto text-center"
             words="LEARN MORE ABOUT YOUR FAVOURITE CHARACTERS AND MAPS"
             wordsCallbackClass={({ word }) =>
               HIGHLIGHTS.has(word)
@@ -85,7 +97,7 @@ const About: FC = () => {
 
         <div className="mt-6 font-poppins mb-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {activeTab === "Characters"
-            ? filteredCharacters.map((character) => (
+            ? characters.map((character) => (
                 <CharacterCard key={character.id} character={character} />
               ))
             : filteredMaps.map((map) => <MapCard key={map.id} map={map} />)}
