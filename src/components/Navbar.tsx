@@ -31,14 +31,16 @@ function Navbar() {
               </div>
               {/* primary */}
               <div>
-                <button className="flex items-center gap-2 bg-gray  text-xs px-2 py-1 md:text-sm md:px-3 md:py-2 lg:text-base lg:px-4 lg:py-2 hover:bg-secondary-blue hover:text-gray-100 transition ">
-                  <img
-                    src={button}
-                    alt="Icon"
-                    className="h-4 w-auto md:h-5 lg:h-6 object-contain"
-                  />
-                  LEVEL UP WITH CHATBOT
-                </button>
+                <Link to="/chat">
+                  <button className="flex items-center gap-2 bg-gray text-xs px-2 py-1 md:text-sm md:px-3 md:py-2 lg:text-base lg:px-4 lg:py-2 hover:bg-secondary-blue hover:text-gray-100 transition ">
+                    <img
+                      src={button}
+                      alt="Icon"
+                      className="h-4 w-auto md:h-5 lg:h-6 object-contain"
+                    />
+                    LEVEL UP WITH CHATBOT
+                  </button>
+                </Link>
               </div>
               <div className="hidden lg:flex font-jersey text-xl gap-8">
                 <Link to="/">MAIN</Link>

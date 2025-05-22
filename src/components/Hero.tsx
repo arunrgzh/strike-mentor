@@ -1,5 +1,6 @@
 import heroImage from "../assets/img/background_1.png";
 import TextGenerateEffect from "./TextGenerate";
+import { Link } from "react-router-dom";
 
 function Hero() {
   return (
@@ -31,9 +32,11 @@ function Hero() {
           skills and dominate the battlefield. Ready to level up? Hit the button
           and begin your journey to victory!
         </p>
-        <button className="bg-primary-orange font-poppins text-white px-6 py-3 rounded hover:bg-opacity-90 transition">
-          Get Started
-        </button>
+        <Link to="/chat">
+          <button className="bg-primary-orange font-poppins text-white px-6 py-3 rounded hover:bg-opacity-90 transition">
+            Get Started
+          </button>
+        </Link>
       </div>
     </section>
   );
