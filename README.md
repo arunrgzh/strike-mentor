@@ -4,7 +4,7 @@
 
 ## 📸 Видео-демо
 
-🎥 [https://drive.google.com/drive/folders/1w7xwX5_OxWC7DYdRIEi7rF7iHRcbP0XV?usp=drive_link](#)
+🎥 [link to video](https://drive.google.com/drive/folders/1w7xwX5_OxWC7DYdRIEi7rF7iHRcbP0XV?usp=drive_link)
 
 ## 📦 Установка и запуск
 
@@ -95,8 +95,12 @@ RealChar.ai SDK — в будущем для общения с виртуаль�
 
 🗣️ RealChar.ai — реалистичное взаимодействие с AI-персонажем.
 
+## Design by me on Figma:
+[link to design](https://www.figma.com/design/ghWvkFQFU914YVetN719i1/Strike-mentor?node-id=23-2264&t=gF2J0AXYgZ4POHQL-0)
+
+
 ## 🚀 Деплой
-[https://strike-mentor-mcs6.vercel.app/](#)
+[link to app](https://strike-mentor-mcs6.vercel.app/)
 
 Сделано с ❤️, технологиями OpenAI и духом Counter-Strike — для будущих легенд игры.
 
